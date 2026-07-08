@@ -1603,26 +1603,86 @@ def apply_semantic_icons(widget) -> None:
             continue
 
 
-# Extract the SVG name registry from _semantic_icon_candidates so we can
-# re-tint icons per widget without rebuilding QIcon objects from scratch.
-_KEY_TO_SVG_NAMES: Dict[str, tuple] = {}
-
+_KEY_TO_SVG_NAMES: Dict[str, tuple] = {
+    'reader_open': ('document-open', 'folder-open'),
+    'reader_recent': ('document-open-recent', 'history'),
+    'reader_sidebar': ('view-sidebar', 'sidebar-show', 'view-list-details'),
+    'reader_rotate_l': ('object-rotate-left', 'rotate-left'),
+    'reader_rotate_r': ('object-rotate-right', 'rotate-right'),
+    'reader_prev': ('go-previous', 'arrow-left'),
+    'reader_next': ('go-next', 'arrow-right'),
+    'reader_zoom_in': ('zoom-in'),
+    'reader_zoom_out': ('zoom-out'),
+    'reader_hand': ('pan-tool', 'input-touchpad', 'edit-select-all'),
+    'reader_continuous': ('view-list-text'),
+    'reader_search': ('edit-find', 'search'),
+    'reader_present': ('view-fullscreen', 'view-expand'),
+    'reader_tab_thumbs': ('view-preview', 'view-grid'),
+    'reader_tab_outline': ('view-list-tree', 'outline'),
+    'reader_tab_search': ('edit-find', 'search'),
+    'reader_recent_clear': ('edit-clear-history', 'user-trash'),
+    'merge_add': ('list-add', 'document-open', 'folder-open'),
+    'merge_remove': ('edit-delete', 'user-trash'),
+    'merge_clear': ('edit-clear', 'edit-delete'),
+    'merge_do': ('edit-copy', 'document-save-as', 'merge'),
+    'split_do': ('application-x-executable', 'scissors'),
+    'move_up': ('go-up', 'arrow-up'),
+    'move_down': ('go-down', 'arrow-down'),
+    'compress_do': ('document-save', 'archive'),
+    'extract_text_btn': ('document-text', 'text-x-generic'),
+    'extract_save_text': ('document-save', 'save'),
+    'extract_images': ('image-x-generic', 'folder-pictures'),
+    'extract_pages_png': ('image-x-generic', 'media-record'),
+    'organize_rot_l': ('object-rotate-left', 'rotate-left'),
+    'organize_rot_r': ('object-rotate-right', 'rotate-right'),
+    'organize_rot_2': ('view-refresh', 'rotate'),
+    'organize_delete': ('edit-delete', 'user-trash'),
+    'organize_save': ('document-save', 'save'),
+    'security_encrypt_group': ('lock', 'object-locked'),
+    'security_decrypt_group': ('unlock', 'object-unlocked'),
+    'security_enc_do': ('lock', 'document-save'),
+    'security_dec_do': ('unlock', 'document-open'),
+    'watermark_do': ('format-text-color', 'draw-freehand', 'watermark'),
+    'metadata_save': ('document-save', 'help-about'),
+    'about_github': ('link', 'internet-web-browser'),
+    'about_website': ('link', 'internet-web-browser'),
+    'about_linkedin': ('link', 'internet-web-browser'),
+    'menu_exit': ('application-exit', 'window-close'),
+    'menu_about': ('help-about', 'dialog-information'),
+    'menu_language': ('preferences-desktop-locale', 'preferences-system-language'),
+    'about_close': ('window-close', 'application-exit'),
+    'nav_reader': ('view-readme', 'document-open'),
+    'nav_merge': ('insert-link', 'document-merge'),
+    'nav_split': ('scissors', 'edit-cut'),
+    'nav_compress': ('archive', 'view-restore'),
+    'nav_extract': ('document-export', 'folder-pictures'),
+    'nav_organize': ('view-sort-ascending', 'view-list-tree'),
+    'nav_security': ('lock', 'security-high'),
+    'nav_watermark': ('draw-freehand', 'format-text-italic'),
+    'nav_metadata': ('document-properties', 'help-about'),
+    'nav_about': ('help-about', 'user-info'),
+    'reader_pin': ('view-pin', 'emblem-important', 'bookmark-new'),
+    'reader_pin_off': ('view-pin', 'bookmark-new', 'document-properties'),
+    'reader_autoscroll': ('media-playback-start'),
+    'reader_autoscroll_pause': ('media-playback-pause'),
+    'reader_autoscroll_speed': ('chronometer'),
+    'browse': ('folder-open', 'document-open'),
+    'open': ('document-open'),
+    'prev': ('go-previous', 'back'),
+    'next': ('go-next', 'forward'),
+    'zoom_in': ('zoom-in'),
+    'zoom_out': ('zoom-out'),
+    'close': ('window-close', 'dialog-close'),
+    'add': ('list-add', 'document-new'),
+    'remove': ('edit-delete', 'user-trash'),
+    'save': ('document-save', 'save'),
+}
 
 def _register_svg_names() -> None:
-    """Populate _KEY_TO_SVG_NAMES from _semantic_icon_candidates definitions."""
-    import inspect
-    src = inspect.getsource(_semantic_icon_candidates)
-    # Find every `("key", (_icon_from_names("a", "b", ...), ...))` entry.
-    for m in re.finditer(r'\("([^"]+)",\s*\(_icon_from_names\(([^)]+)\)', src):
-        key = m.group(1)
-        raw = m.group(2)
-        names = tuple(n.strip().strip('"').strip("'") for n in raw.split(",")
-                      if n.strip() and not n.strip().startswith("fallback"))
-        _KEY_TO_SVG_NAMES[key] = names
-
+    """Kept for backward compatibility; the registry is static now."""
+    return
 
 _register_svg_names()
-
 # =============================================================================
 #  Background worker
 # =============================================================================
