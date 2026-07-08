@@ -132,7 +132,6 @@ PDF-Master/
 - PyQt5
 - PyMuPDF
 - pypdf
-- PyInstaller
 
 ---
 
