@@ -8,7 +8,7 @@ Author : Mohammad Ali Bazzazi  (https://github.com/bazzazi)
 Website: https://mohammadalibazzazi.ir
 LinkedIn: https://www.linkedin.com/in/bazzazi/
 License: All rights reserved
-Version: 1.0.1
+Version: 1.0.2
 
 Modules
 -------
