@@ -67,7 +67,7 @@ The interface includes three polished themes — **Dark**, **Light**, and **Sepi
 
 ## Releases
 
-### Version 1.0.1
+### Version 1.0.2
 This release focuses on visual consistency, usability, and a more polished reading experience.
 
 Highlights:
